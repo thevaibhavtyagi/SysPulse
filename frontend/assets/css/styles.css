@@ -1,0 +1,63 @@
+/* Custom Scrollbar Logic */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* slate-300 for light mode */
+    border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #334155; /* slate-700 for dark mode */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* slate-400 */
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #475569; /* slate-600 */
+}
+
+/* Adaptive Glassmorphism Utilities */
+.glass-panel {
+    /* Light Mode Default: White frosted glass */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.dark .glass-panel {
+    /* Dark Mode Override: Dark frosted glass */
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+/* Glow Effects (Dark Mode Only) */
+.dark .glow-text {
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+.glow-text {
+    text-shadow: none;
+}
+
+/* Animations */
+.animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Table Transitions */
+tr { 
+    transition: background-color 0.15s ease; 
+}
+
+/* Smooth Theme Transitions */
+*, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
