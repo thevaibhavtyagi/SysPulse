@@ -321,8 +321,14 @@ class SysPulseApp {
             let aVal = a[this.sortColumn];
             let bVal = b[this.sortColumn];
 
+            // Defensive coding: handle null/undefined values safely
+            if (aVal === null || aVal === undefined) aVal = '';
+            if (bVal === null || bVal === undefined) bVal = '';
+
             if (typeof aVal === 'string') {
                 aVal = aVal.toLowerCase();
+            }
+            if (typeof bVal === 'string') {
                 bVal = bVal.toLowerCase();
             }
 
@@ -336,11 +342,17 @@ class SysPulseApp {
 
     filterProcesses(processes) {
         if (!this.searchTerm) return processes;
+        
         return processes.filter(proc => {
+            // Defensive coding: Ensure properties exist before calling methods
+            const name = (proc.name || '').toLowerCase();
+            const pid = (proc.pid || '').toString();
+            const username = (proc.username || '').toLowerCase();
+
             return (
-                proc.name.toLowerCase().includes(this.searchTerm) ||
-                proc.pid.toString().includes(this.searchTerm) ||
-                proc.username.toLowerCase().includes(this.searchTerm)
+                name.includes(this.searchTerm) ||
+                pid.includes(this.searchTerm) ||
+                username.includes(this.searchTerm)
             );
         });
     }
@@ -394,6 +406,7 @@ class SysPulseApp {
     }
 
     escapeHtml(text) {
+        if (text === null || text === undefined) return 'N/A';
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
