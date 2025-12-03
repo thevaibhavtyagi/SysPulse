@@ -5,24 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SysPulse - The Real-Time Heartbeat of Your System</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- External CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
-    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -41,13 +35,21 @@
             }
         }
     </script>
+    
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-200 antialiased h-screen overflow-hidden flex selection:bg-primary-500 selection:text-white transition-colors duration-300">
 
-    <!-- Sidebar -->
     <nav class="w-20 lg:w-64 flex-shrink-0 border-r border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col justify-between transition-all duration-300 z-30">
         <div>
-            <!-- Logo & Tagline -->
             <div class="flex flex-col border-b border-gray-200 dark:border-slate-800">
                 <div class="h-20 flex items-center justify-center lg:justify-start lg:px-6">
                     <div class="relative flex items-center gap-3">
@@ -59,7 +61,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Tagline Area -->
                 <div class="hidden lg:block px-6 pb-4">
                     <p class="text-[11px] text-gray-500 dark:text-slate-400 font-medium uppercase tracking-wide leading-relaxed border-l-2 border-primary-500 pl-3">
                         The Real-Time Heartbeat<br>of Your System
@@ -67,24 +68,18 @@
                 </div>
             </div>
 
-            <!-- Menu -->
             <div class="p-4 space-y-2">
-                <a href="#" class="flex items-center gap-3 px-3 py-3 bg-gray-100 dark:bg-slate-800/50 text-primary-600 dark:text-white rounded-lg border border-gray-200 dark:border-slate-700/50 shadow-sm transition-colors">
-                    <i class="ph ph-squares-four text-xl"></i>
+                <button id="nav-dashboard" class="w-full flex items-center gap-3 px-3 py-3 bg-primary-50 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400 rounded-lg border border-primary-100 dark:border-primary-500/20 shadow-sm transition-all group">
+                    <i class="ph-fill ph-squares-four text-xl"></i>
                     <span class="hidden lg:block font-medium text-sm">Dashboard</span>
-                </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-3 text-gray-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+                </button>
+                <button id="nav-analytics" class="w-full flex items-center gap-3 px-3 py-3 text-gray-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-800/50 rounded-lg transition-all group border border-transparent">
                     <i class="ph ph-chart-line-up text-xl"></i>
                     <span class="hidden lg:block font-medium text-sm">Analytics</span>
-                </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-3 text-gray-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
-                    <i class="ph ph-terminal-window text-xl"></i>
-                    <span class="hidden lg:block font-medium text-sm">Logs</span>
-                </a>
+                </button>
             </div>
         </div>
 
-        <!-- Footer / Controls -->
         <div class="p-4 border-t border-gray-200 dark:border-slate-800">
             <div class="bg-gray-50 dark:bg-slate-900 rounded-lg p-3 border border-gray-200 dark:border-slate-800 transition-colors">
                 <div class="flex items-center gap-3 mb-3">
@@ -99,9 +94,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen overflow-hidden relative bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
-        <!-- Top Header -->
         <header class="h-20 flex items-center justify-between px-6 border-b border-gray-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur z-20 transition-colors duration-300">
             <div>
                 <h2 class="text-lg font-semibold text-gray-900 dark:text-white">System Overview</h2>
@@ -109,7 +102,6 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <!-- Search Bar -->
                 <div class="relative group">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="ph ph-magnifying-glass text-gray-400 dark:text-slate-500 group-focus-within:text-primary-500 transition-colors"></i>
@@ -121,7 +113,6 @@
                 
                 <div class="h-8 w-[1px] bg-gray-200 dark:bg-slate-700 mx-2"></div>
 
-                <!-- Uptime Badge -->
                 <div class="flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-slate-800 rounded-full border border-gray-200 dark:border-slate-700 transition-colors">
                     <i class="ph-fill ph-clock text-primary-500 dark:text-primary-400"></i>
                     <span id="uptimeValue" class="text-xs font-mono text-gray-700 dark:text-slate-300">0s</span>
@@ -129,136 +120,183 @@
             </div>
         </header>
 
-        <!-- Scrollable Dashboard Area -->
         <div class="flex-1 overflow-y-auto p-6 scroll-smooth">
-            <div class="max-w-7xl mx-auto space-y-6">
+            <div class="max-w-7xl mx-auto">
                 
-                <!-- Metrics Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    
-                    <!-- CPU Card -->
-                    <div class="glass-panel rounded-2xl p-5 relative overflow-hidden group transition-all duration-300">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
-                            <i class="ph-fill ph-cpu text-6xl text-primary-500 dark:text-primary-400"></i>
+                <div id="view-dashboard" class="space-y-6 fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div class="glass-panel rounded-2xl p-5 relative overflow-hidden group transition-all duration-300">
+                            <div class="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
+                                <i class="ph-fill ph-cpu text-6xl text-primary-500 dark:text-primary-400"></i>
+                            </div>
+                            <div class="flex flex-col h-full justify-between relative z-10">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="p-1.5 rounded-lg bg-primary-100 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400">
+                                        <i class="ph-bold ph-cpu"></i>
+                                    </span>
+                                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">CPU Usage</span>
+                                </div>
+                                <div class="mt-2">
+                                    <div id="cpuValue" class="text-4xl font-bold text-gray-900 dark:text-white font-mono glow-text transition-colors">0%</div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="w-full bg-gray-200 dark:bg-slate-700/50 rounded-full h-2 overflow-hidden">
+                                        <div id="cpuBar" class="bg-gradient-to-r from-primary-500 to-blue-600 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(14,165,233,0.5)]" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex flex-col h-full justify-between relative z-10">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="p-1.5 rounded-lg bg-primary-100 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400">
-                                    <i class="ph-bold ph-cpu"></i>
-                                </span>
-                                <span class="text-sm font-medium text-gray-500 dark:text-slate-400">CPU Usage</span>
+
+                        <div class="glass-panel rounded-2xl p-5 relative overflow-hidden group transition-all duration-300">
+                            <div class="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
+                                <i class="ph-fill ph-memory text-6xl text-secondary-500 dark:text-secondary-400"></i>
                             </div>
-                            <div class="mt-2">
-                                <div id="cpuValue" class="text-4xl font-bold text-gray-900 dark:text-white font-mono glow-text transition-colors">0%</div>
+                            <div class="flex flex-col h-full justify-between relative z-10">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="p-1.5 rounded-lg bg-secondary-100 dark:bg-secondary-500/10 text-secondary-600 dark:text-secondary-400">
+                                        <i class="ph-bold ph-memory"></i>
+                                    </span>
+                                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Memory</span>
+                                </div>
+                                <div class="mt-2 flex items-end gap-2">
+                                    <div id="ramValue" class="text-4xl font-bold text-gray-900 dark:text-white font-mono transition-colors">0%</div>
+                                    <div id="ramDetails" class="text-xs text-gray-500 dark:text-slate-500 mb-1.5 font-mono">0/0 GB</div>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="w-full bg-gray-200 dark:bg-slate-700/50 rounded-full h-2 overflow-hidden">
+                                        <div id="ramBar" class="bg-gradient-to-r from-secondary-500 to-emerald-600 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" style="width: 0%"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-4">
-                                <div class="w-full bg-gray-200 dark:bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                                    <div id="cpuBar" class="bg-gradient-to-r from-primary-500 to-blue-600 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(14,165,233,0.5)]" style="width: 0%"></div>
+                        </div>
+
+                        <div class="glass-panel rounded-2xl p-5 relative overflow-hidden group transition-all duration-300">
+                            <div class="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
+                                <i class="ph-fill ph-gear text-6xl text-purple-500 dark:text-purple-400"></i>
+                            </div>
+                            <div class="flex flex-col h-full justify-between relative z-10">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="p-1.5 rounded-lg bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                                        <i class="ph-bold ph-gear"></i>
+                                    </span>
+                                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Active Processes</span>
+                                </div>
+                                <div class="mt-2">
+                                    <div id="processCount" class="text-4xl font-bold text-gray-900 dark:text-white font-mono transition-colors">0</div>
+                                </div>
+                                <div class="mt-4 flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400">
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    System Operational
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Memory Card -->
-                    <div class="glass-panel rounded-2xl p-5 relative overflow-hidden group transition-all duration-300">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
-                            <i class="ph-fill ph-memory text-6xl text-secondary-500 dark:text-secondary-400"></i>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-panel rounded-2xl p-6 border border-gray-200 dark:border-slate-700/50 transition-colors">
+                            <h3 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-4 flex items-center gap-2">
+                                <i class="ph-fill ph-chart-line text-primary-500 dark:text-primary-400"></i> CPU History
+                            </h3>
+                            <div class="relative h-64 w-full">
+                                <canvas id="cpuChart"></canvas>
+                            </div>
                         </div>
-                        <div class="flex flex-col h-full justify-between relative z-10">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="p-1.5 rounded-lg bg-secondary-100 dark:bg-secondary-500/10 text-secondary-600 dark:text-secondary-400">
-                                    <i class="ph-bold ph-memory"></i>
+                        <div class="glass-panel rounded-2xl p-6 border border-gray-200 dark:border-slate-700/50 transition-colors">
+                            <h3 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-4 flex items-center gap-2">
+                                <i class="ph-fill ph-chart-bar text-secondary-500 dark:text-secondary-400"></i> Memory History
+                            </h3>
+                            <div class="relative h-64 w-full">
+                                <canvas id="memoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-gray-200 dark:border-slate-700/50 flex flex-col max-h-[500px] transition-colors">
+                        <div class="p-4 border-b border-gray-200 dark:border-slate-700/50 bg-gray-50/50 dark:bg-slate-800/30 flex justify-between items-center">
+                            <h3 class="text-sm font-semibold text-gray-900 dark:text-slate-200">Process List</h3>
+                            <div class="flex gap-2 text-xs text-gray-500 dark:text-slate-500">
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500/50"></span>High CPU</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-500/50"></span>High Mem</span>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-auto flex-1 custom-scrollbar">
+                            <table class="w-full text-sm text-left process-table">
+                                <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-100/90 dark:bg-slate-800/80 sticky top-0 backdrop-blur-sm z-10">
+                                    <tr>
+                                        <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="pid">PID</th>
+                                        <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="name">Name</th>
+                                        <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable sorted-desc transition-colors" data-sort="cpu_percent">CPU %</th>
+                                        <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="memory_percent">Mem %</th>
+                                        <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="status">Status</th>
+                                        <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="username">User</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="processTableBody" class="divide-y divide-gray-200 dark:divide-slate-800">
+                                    <tr class="text-center">
+                                        <td colspan="6" class="px-6 py-12 text-gray-500 dark:text-slate-500 italic">
+                                            <i class="ph ph-spinner animate-spin text-2xl mb-2"></i><br>
+                                            Waiting for stream...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="view-analytics" class="space-y-6 hidden fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass-panel rounded-2xl p-5 relative overflow-hidden">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="p-1.5 rounded-lg bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400">
+                                    <i class="ph-bold ph-hard-drives"></i>
                                 </span>
-                                <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Memory</span>
+                                <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Disk I/O</span>
                             </div>
-                            <div class="mt-2 flex items-end gap-2">
-                                <div id="ramValue" class="text-4xl font-bold text-gray-900 dark:text-white font-mono transition-colors">0%</div>
-                                <div id="ramDetails" class="text-xs text-gray-500 dark:text-slate-500 mb-1.5 font-mono">0/0 GB</div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 dark:text-slate-500 mb-1">Read Speed</p>
+                                    <p id="diskReadVal" class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white font-mono">0 KB/s</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 dark:text-slate-500 mb-1">Write Speed</p>
+                                    <p id="diskWriteVal" class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white font-mono">0 KB/s</p>
+                                </div>
                             </div>
-                            <div class="mt-4">
-                                <div class="w-full bg-gray-200 dark:bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                                    <div id="ramBar" class="bg-gradient-to-r from-secondary-500 to-emerald-600 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" style="width: 0%"></div>
+                        </div>
+
+                        <div class="glass-panel rounded-2xl p-5 relative overflow-hidden">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="p-1.5 rounded-lg bg-indigo-100 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                                    <i class="ph-bold ph-globe"></i>
+                                </span>
+                                <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Network I/O</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 dark:text-slate-500 mb-1">Upload</p>
+                                    <p id="netSentVal" class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white font-mono">0 KB/s</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 dark:text-slate-500 mb-1">Download</p>
+                                    <p id="netRecvVal" class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white font-mono">0 KB/s</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Processes Card -->
-                    <div class="glass-panel rounded-2xl p-5 relative overflow-hidden group transition-all duration-300">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
-                            <i class="ph-fill ph-gear text-6xl text-purple-500 dark:text-purple-400"></i>
-                        </div>
-                        <div class="flex flex-col h-full justify-between relative z-10">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="p-1.5 rounded-lg bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400">
-                                    <i class="ph-bold ph-gear"></i>
-                                </span>
-                                <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Active Processes</span>
-                            </div>
-                            <div class="mt-2">
-                                <div id="processCount" class="text-4xl font-bold text-gray-900 dark:text-white font-mono transition-colors">0</div>
-                            </div>
-                            <div class="mt-4 flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400">
-                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                System Operational
-                            </div>
+                    <div class="glass-panel rounded-2xl p-6 border border-gray-200 dark:border-slate-700/50 transition-colors">
+                        <h3 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-4 flex items-center gap-2">
+                            <i class="ph-fill ph-trend-up text-indigo-500 dark:text-indigo-400"></i> Network Traffic History (KB/s)
+                        </h3>
+                        <div class="relative h-64 w-full">
+                            <canvas id="networkChart"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <!-- Charts Section -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="glass-panel rounded-2xl p-6 border border-gray-200 dark:border-slate-700/50 transition-colors">
-                        <h3 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-4 flex items-center gap-2">
-                            <i class="ph-fill ph-chart-line text-primary-500 dark:text-primary-400"></i> CPU History
-                        </h3>
-                        <div class="relative h-64 w-full">
-                            <canvas id="cpuChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="glass-panel rounded-2xl p-6 border border-gray-200 dark:border-slate-700/50 transition-colors">
-                        <h3 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-4 flex items-center gap-2">
-                            <i class="ph-fill ph-chart-bar text-secondary-500 dark:text-secondary-400"></i> Memory History
-                        </h3>
-                        <div class="relative h-64 w-full">
-                            <canvas id="memoryChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Process Table Section -->
-                <div class="glass-panel rounded-2xl overflow-hidden border border-gray-200 dark:border-slate-700/50 flex flex-col max-h-[500px] transition-colors">
-                    <div class="p-4 border-b border-gray-200 dark:border-slate-700/50 bg-gray-50/50 dark:bg-slate-800/30 flex justify-between items-center">
-                        <h3 class="text-sm font-semibold text-gray-900 dark:text-slate-200">Process List</h3>
-                        <div class="flex gap-2 text-xs text-gray-500 dark:text-slate-500">
-                            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500/50"></span>High CPU</span>
-                            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-500/50"></span>High Mem</span>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-auto flex-1 custom-scrollbar">
-                        <table class="w-full text-sm text-left process-table">
-                            <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-100/90 dark:bg-slate-800/80 sticky top-0 backdrop-blur-sm z-10">
-                                <tr>
-                                    <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="pid">PID</th>
-                                    <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="name">Name</th>
-                                    <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable sorted-desc transition-colors" data-sort="cpu_percent">CPU %</th>
-                                    <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="memory_percent">Mem %</th>
-                                    <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="status">Status</th>
-                                    <th class="px-6 py-3 font-medium cursor-pointer hover:text-primary-600 dark:hover:text-white sortable transition-colors" data-sort="username">User</th>
-                                </tr>
-                            </thead>
-                            <tbody id="processTableBody" class="divide-y divide-gray-200 dark:divide-slate-800">
-                                <tr class="text-center">
-                                    <td colspan="6" class="px-6 py-12 text-gray-500 dark:text-slate-500 italic">
-                                        <i class="ph ph-spinner animate-spin text-2xl mb-2"></i><br>
-                                        Waiting for stream...
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
             
             <footer class="mt-8 text-center text-xs text-gray-500 dark:text-slate-600 pb-4">
@@ -267,7 +305,6 @@
         </div>
     </main>
 
-    <!-- Application Logic Script -->
     <script src="assets/js/app.js"></script>
 </body>
 </html>

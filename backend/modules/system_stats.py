@@ -18,6 +18,32 @@ def get_memory_info() -> Dict[str, Any]:
     }
 
 
+def get_disk_io() -> Dict[str, int]:
+    """Fetched for Analytics Tab"""
+    try:
+        # perdisk=False returns total IO across all disks
+        disk = psutil.disk_io_counters(perdisk=False)
+        return {
+            "read_bytes": disk.read_bytes,
+            "write_bytes": disk.write_bytes
+        }
+    except Exception:
+        return {"read_bytes": 0, "write_bytes": 0}
+
+
+def get_network_io() -> Dict[str, int]:
+    """Fetched for Analytics Tab"""
+    try:
+        # pernic=False returns total IO across all interfaces
+        net = psutil.net_io_counters(pernic=False)
+        return {
+            "bytes_sent": net.bytes_sent,
+            "bytes_recv": net.bytes_recv
+        }
+    except Exception:
+        return {"bytes_sent": 0, "bytes_recv": 0}
+
+
 def get_system_uptime() -> str:
     boot_time = psutil.boot_time()
     uptime_seconds = time.time() - boot_time
@@ -39,11 +65,17 @@ def get_system_metrics() -> Dict[str, Any]:
     cpu_usage = get_cpu_usage()
     memory_info = get_memory_info()
     uptime = get_system_uptime()
+    
+    # Added these two calls
+    disk_io = get_disk_io()
+    net_io = get_network_io()
 
     return {
         "cpu_percent": round(cpu_usage, 1),
         "memory_percent": round(memory_info["percent"], 1),
         "memory_used_gb": round(memory_info["used"] / (1024**3), 2),
         "memory_total_gb": round(memory_info["total"] / (1024**3), 2),
-        "uptime": uptime
+        "uptime": uptime,
+        "disk": disk_io,    # New Field
+        "network": net_io   # New Field
     }
